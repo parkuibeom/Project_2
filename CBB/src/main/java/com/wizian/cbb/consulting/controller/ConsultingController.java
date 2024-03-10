@@ -33,15 +33,15 @@ public class ConsultingController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping(value = "/consulting/items/insert")
 	public @ResponseBody int ItemInsert(@RequestBody ConItemVO conItemsVO) {
-//		String checkId = consultingService.itemCheck(conItemsVO);
-//		System.out.println(checkId);
+		String checkId = consultingService.itemCheck(conItemsVO);
+		System.out.println(checkId);
 		int num = 0;
-//		if(checkId == null) {
-//			num = consultingService.itemInsert(conItemsVO);
-//			return num;
-//		}else {
-//			num = consultingService.itemUpdate(conItemsVO);
-//		}
+		if(checkId == null) {
+			num = consultingService.itemInsert(conItemsVO);
+			return num;
+		}else {
+			num = consultingService.itemUpdate(conItemsVO);
+		}
 		num = consultingService.itemInsert(conItemsVO);
 		return num;
 	}
