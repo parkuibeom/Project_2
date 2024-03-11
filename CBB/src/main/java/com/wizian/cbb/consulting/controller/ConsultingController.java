@@ -3,6 +3,7 @@ package com.wizian.cbb.consulting.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,6 +64,12 @@ public class ConsultingController {
 		return num;
 	}
 	
-	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@GetMapping(value = "/consulting/schedules")
+	public @ResponseBody List<Schedules> adminSchedules() {
+		List list = consultingService.adminSchedules();
+		System.out.println(list);
+		return list;
+	}
 	
 }
