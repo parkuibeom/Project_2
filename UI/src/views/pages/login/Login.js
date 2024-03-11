@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   CButton,
   CCard,
@@ -12,24 +12,24 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilLockLocked, cilUser } from '@coreui/icons'
+} from "@coreui/react";
+import CIcon from "@coreui/icons-react";
+import { cilLockLocked, cilUser } from "@coreui/icons";
 
 const Login = () => {
-  const [id, setId] = useState('')
-  const [password, setPassword] = useState('')
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   const loginSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    fetch('/cbb/user/login', {
-      method: 'POST',
+    fetch("/cbb/user/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ id, password }),
-    })
-  }
+    });
+  };
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
@@ -40,7 +40,9 @@ const Login = () => {
                 <CCardBody>
                   <CForm onSubmit={loginSubmit}>
                     <h1>Login</h1>
-                    <p className="text-medium-emphasis">Sign In to your account</p>
+                    <p className="text-medium-emphasis">
+                      Sign In to your account
+                    </p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
@@ -78,16 +80,25 @@ const Login = () => {
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
+              <CCard
+                className="text-white bg-primary py-5"
+                style={{ width: "44%" }}
+              >
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua.
                     </p>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
+                      <CButton
+                        color="primary"
+                        className="mt-3"
+                        active
+                        tabIndex={-1}
+                      >
                         Register Now!
                       </CButton>
                     </Link>
@@ -99,7 +110,7 @@ const Login = () => {
         </CRow>
       </CContainer>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
