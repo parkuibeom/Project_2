@@ -4,7 +4,7 @@
 <mapper
 	namespace="com.wizian.cbb.consulting.dao.IConsultingRepository">
 	<resultMap id="selectConsulting"
-		type="com.wizian.wlms.consulting.model.ConItemVO">
+		type="com.wizian.cbb.consulting.model.ConItemVO">
 		<result property="conItemsID" column="DSCSN_TTL_SN" />
 		<result property="conItems" column="DSCSN_TTL" />
 		<result property="use" column="USE_YN" />
@@ -20,6 +20,7 @@
 		<result property="consultationTime" column="consultationTime" />
 		<result property="creationDate" column="creationDate" />
 	</resultMap>
+
 
 	<select id="Consultationitems" resultMap="selectConsulting">
 		SELECT * FROM
@@ -55,8 +56,14 @@
 		SELECT DSCSN_TTL_SN FROM
 		DSCSN_TTL WHERE DSCSN_TTL_SN = #{conItemsID}
 	</select>
-	
-	
+
+
+
+
+
+
+
+
 	<select id="adminSchedules" resultMap="selectSchedules">
 		SELECT
 		c.COUNSELOR_TYPE AS TYPE,

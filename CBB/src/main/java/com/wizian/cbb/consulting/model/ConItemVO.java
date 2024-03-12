@@ -7,7 +7,9 @@ public class ConItemVO {
 	private String conItems;
 	private char use;
 	private String creationDate;
-	private Date modificationDate;
+	private String modificationDate;
+	
+	
 	public String getConItemsID() {
 		return conItemsID;
 	}
@@ -32,10 +34,10 @@ public class ConItemVO {
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
-	public Date getModificationDate() {
+	public String getModificationDate() {
 		return modificationDate;
 	}
-	public void setModificationDate(Date modificationDate) {
+	public void setModificationDate(String modificationDate) {
 		this.modificationDate = modificationDate;
 	}
 	
