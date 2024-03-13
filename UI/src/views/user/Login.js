@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -16,19 +16,45 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
+const test = () => {
+  console.log(localStorage.getItem("id"));
+  console.log(localStorage.getItem("userGroupCd"));
+};
+
 const Login = () => {
-  const [id, setId] = useState('')
+  const [loginId, setId] = useState('')
   const [password, setPassword] = useState('')
+  const navigate = useNavigate()
   const loginSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     fetch('/cbb/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ id, password }),
+      body: JSON.stringify({ loginId, password }),
     })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          return response.json().then(data => {
+            throw new Error(data.error); // 서버에서 반환한 오류 메시지 처리
+          });
+        }
+      })
+      .then(data => {
+        localStorage.setItem('loginId', data.loginId);
+        localStorage.setItem('userGroupCd', data.userGroupCd);
+        console.log(localStorage.getItem("loginId"));
+        console.log(localStorage.getItem("userGroupCd"));
+        navigate('/dashboard');
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+
   }
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -39,14 +65,14 @@ const Login = () => {
               <CCard className="p-4">
                 <CCardBody>
                   <CForm onSubmit={loginSubmit}>
-                    <h1>Login</h1>
-                    <p className="text-medium-emphasis">Sign In to your account</p>
+                    <h1>로그인</h1>
+                    <p className="text-medium-emphasis">&nbsp;</p>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
                       <CFormInput
-                        placeholder="id"
+                        placeholder="아이디"
                         autoComplete="id"
                         onChange={(e) => setId(e.target.value)}
                       />
@@ -57,7 +83,7 @@ const Login = () => {
                       </CInputGroupText>
                       <CFormInput
                         type="password"
-                        placeholder="password"
+                        placeholder="비밀번호"
                         autoComplete="new-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -66,13 +92,15 @@ const Login = () => {
                     <CRow>
                       <CCol xs={6}>
                         <CButton color="primary" className="px-4" type="submit">
-                          Login
+                          로그인
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
-                        </CButton>
+                        <Link to="/forgotPswd">
+                          <CButton color="link" className="px-0">
+                            비밀번호 찾기
+                          </CButton>
+                        </Link>
                       </CCol>
                     </CRow>
                   </CForm>
@@ -81,16 +109,11 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
+                    <h2>대학 사이트</h2>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                       tempor incididunt ut labore et dolore magna aliqua.
                     </p>
-                    <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
-                        Register Now!
-                      </CButton>
-                    </Link>
                   </div>
                 </CCardBody>
               </CCard>
