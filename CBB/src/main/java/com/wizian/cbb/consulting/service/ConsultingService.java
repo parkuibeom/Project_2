@@ -1,5 +1,6 @@
 package com.wizian.cbb.consulting.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.wizian.cbb.consulting.dao.IConsultingRepository;
 import com.wizian.cbb.consulting.model.ConItemVO;
+import com.wizian.cbb.consulting.model.ResultVO;
+import com.wizian.cbb.consulting.model.SchedulePrintVO;
+import com.wizian.cbb.consulting.model.ScheduleVO;
 
 
 @Service
@@ -44,9 +48,54 @@ public class ConsultingService implements IConsultingService {
     
     
     @Override
-    public List<ConItemVO> adminSchedules() {
-    	return consultingRepository.adminSchedules();
+    public List<SchedulePrintVO> adminSchedulesList() {
+    	return consultingRepository.adminScheduleList();
     }
    
+    
+    
+    @Override
+    public int insertSchedule(ScheduleVO scheduleVO) {
+        String id = consultingRepository.checkId(scheduleVO.getId());
+        if (id == null) {
+            return 0;
+        }
+
+        int year = scheduleVO.getYear();
+        int month = scheduleVO.getMonth();
+        int day = scheduleVO.getDay();
+        boolean[] list = scheduleVO.getTimeSlots();
+        LocalDate date = LocalDate.of(year, month, day);
+        String strDate = date.toString();
+        int cdNum = 10;
+        int num = 0;
+
+        try {
+            for (int i = 0; i < list.length; i++) {
+                if (list[i]) {
+                    // 해당 시간대에 이미 스케줄이 있는지 확인
+                    if (!consultingRepository.checkDuplicate(id, cdNum, strDate)) {
+                        // 중복되지 않으면 스케줄 추가
+                        num += consultingRepository.insertSchedule(id, cdNum, strDate);
+                    }
+                }
+                if (i != 4) {
+                    cdNum += 10;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+        if(num == 0) {
+        	num = -1;
+        }
+        return num;
+    }
+
+    @Override
+    public List<ResultVO> resultList() {
+    	return consultingRepository.resultList();
+    }
 }
 

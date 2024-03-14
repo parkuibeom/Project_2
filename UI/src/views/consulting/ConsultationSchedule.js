@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./scss/ConsultationSchedule.scss"; // Test.scss 파일을 import합니다.
-import SearchFilters from "./components/SearchFilters"; // SearchFilters 컴포넌트를 import합니다.
-import Pagination from "./components/Pagenation"; // Pagination 컴포넌트를 import합니다.
+import SearchFilters from "./components/SearchFilters";
+import Pagination from "./components/Pagenation";
 
 const ConsultationSchedule = () => {
   // 상태 변수들을 선언합니다.
@@ -22,14 +22,14 @@ const ConsultationSchedule = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8181/cbb/consulting/schedules`
+        `http://localhost:8181/cbb/consulting/history`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
       setschedules(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -101,12 +101,12 @@ const ConsultationSchedule = () => {
       <table className="schedules-table">
         <thead className="table-header">
           <tr>
-            <th>분류</th>
+            <th>유형</th>
             <th>상담원</th>
             <th>상담 항목</th>
             <th>상담 시간</th>
-            <th>상담 일자</th>
-            <th>등록 일자</th>
+            <th>상담일</th>
+            <th>등록일</th>
           </tr>
         </thead>
         <tbody>
@@ -117,6 +117,7 @@ const ConsultationSchedule = () => {
               <td>{item.item}</td>
               <td>{item.consultationTime}</td>
               <td>{item.consultationDate.slice(0, 10)}</td>
+              <td>{item.creationDate.slice(0, 10)}</td>
               <td>{item.creationDate.slice(0, 10)}</td>
             </tr>
           ))}

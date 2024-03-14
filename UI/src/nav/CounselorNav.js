@@ -34,7 +34,7 @@ export const _nav = [
       {
         component: CNavItem,
         name: "상담 시간표 등록",
-        to: "#",
+        to: "/schedule",
       },
       {
         component: CNavItem,
