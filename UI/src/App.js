@@ -13,7 +13,11 @@ const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
 // Pages
 const Login = React.lazy(() => import('./views/user/Login'))
+<<<<<<< HEAD
 const Register = React.lazy(() => import('./views/user/Register'))
+=======
+const ForgotPswd = React.lazy(() => import('./views/user/forgotPassword'))
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 
@@ -24,7 +28,7 @@ class App extends Component {
         <Suspense fallback={loading}>
           <Routes>
             <Route exact path="/login" name="Login Page" element={<Login />} />
-            <Route exact path="/register" name="Register Page" element={<Register />} />
+            <Route exact path="/forgotPswd" name="ForgotPswd Page" element={<ForgotPswd />} />
             <Route exact path="/404" name="Page 404" element={<Page404 />} />
             <Route exact path="/500" name="Page 500" element={<Page500 />} />
             <Route path="*" name="Home" element={<DefaultLayout />} />

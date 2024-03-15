@@ -1,0 +1,12 @@
+diff a/UI/package.json b/UI/package.json	(rejected hunks)
+@@ -51,8 +51,8 @@
+     "eslint-config-prettier": "^8.8.0",
+     "eslint-plugin-prettier": "^4.2.1",
+     "prettier": "2.8.8",
+-    "react-scripts": "^5.0.1",
+-    "sass": "^1.63.6",
++    "react-scripts": "5.0.1",
++    "sass": "^1.71.1",
+     "web-vitals": "^3.3.2"
+   },
+   "engines": {

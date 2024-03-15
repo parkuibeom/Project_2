@@ -21,6 +21,7 @@ export const _nav = [
     name: '학과',
   },
   {
+<<<<<<< HEAD
     component: CNavGroup,
     name: '이력서관리',
     to: '#',
@@ -66,5 +67,11 @@ export const _nav = [
         to: '#',
       }
     ]
+=======
+    component: CNavItem,
+    name: '지도교수 배정',
+    to: '/professorSelect',
+    icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
   }
 ]

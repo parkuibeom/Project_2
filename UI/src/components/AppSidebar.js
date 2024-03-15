@@ -13,7 +13,10 @@ import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
 
 // sidebar nav config
+<<<<<<< HEAD
 import { _nav as nav } from '../_nav'
+=======
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
 import { _nav as acavsrNav } from 'src/nav/ACAVSRNav'
 import { _nav as adminNav } from 'src/nav/AdminNav'
 import { _nav as bzentyNav } from 'src/nav/BzentyNav'
