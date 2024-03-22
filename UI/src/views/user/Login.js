@@ -96,11 +96,17 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
+<<<<<<< HEAD
+                        <CButton color="link" className="px-0" onClick={test}>
+                          비밀번호 찾기
+                        </CButton>
+=======
                         <Link to="/forgotPswd">
                           <CButton color="link" className="px-0">
                             비밀번호 찾기
                           </CButton>
                         </Link>
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
                       </CCol>
                     </CRow>
                   </CForm>

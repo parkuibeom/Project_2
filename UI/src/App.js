@@ -13,7 +13,11 @@ const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
 // Pages
 const Login = React.lazy(() => import('./views/user/Login'))
+<<<<<<< HEAD
+const Register = React.lazy(() => import('./views/user/Register'))
+=======
 const ForgotPswd = React.lazy(() => import('./views/user/forgotPassword'))
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'))
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'))
 

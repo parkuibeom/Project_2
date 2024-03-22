@@ -16,13 +16,26 @@ import { cilMenu } from '@coreui/icons'
 
 import { AppBreadcrumb } from './index'
 import { logo } from 'src/assets/brand/logo'
+<<<<<<< HEAD
+import StudentHeaderNav from './head/StudentHeader'
+import AdminHeaderNav from './head/AdminHeader'
+import ACAVSRHeaderNav from './head/ACAVSRHeader'
+import SCSBJTHeaderNav from './head/SCSBJTHeader'
+import BzentyHeaderNav from './head/BzentyHeader'
+import CounselorHeaderNav from './head/CounselorHeader'
+=======
 import HeaderNavItem from './head/HeaderNavItem'
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
 
 const AppHeader = () => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector((state) => state.sidebarShow)
   const navigate = useNavigate()
+<<<<<<< HEAD
+
+=======
   let menuItems
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
   const handleLogout = () => {
     localStorage.clear()
 
@@ -39,6 +52,19 @@ const AppHeader = () => {
 
   let HeaderNavComponent;
   if (userGroup === '10') {
+<<<<<<< HEAD
+    HeaderNavComponent = <AdminHeaderNav />;
+  } else if (userGroup === '20') {
+    HeaderNavComponent = <StudentHeaderNav />;
+  } else if (userGroup === '30') {
+    HeaderNavComponent = <ACAVSRHeaderNav />;
+  } else if (userGroup === '40') {
+    HeaderNavComponent = <SCSBJTHeaderNav />;
+  } else if (userGroup === '50') {
+    HeaderNavComponent = <BzentyHeaderNav />;
+  } else if (userGroup === '60') {
+    HeaderNavComponent = <CounselorHeaderNav />;
+=======
     menuItems = [
       { name: '담당자', link: '/' },
       { name: '담당자', link: '/' },
@@ -78,6 +104,7 @@ const AppHeader = () => {
       { name: '상담', link: '/' }
     ];
     HeaderNavComponent = <HeaderNavItem navItem={menuItems} />
+>>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
   }
 
   return (
