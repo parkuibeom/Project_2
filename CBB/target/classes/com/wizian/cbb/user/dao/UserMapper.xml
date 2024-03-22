@@ -4,7 +4,7 @@
 <mapper namespace="com.wizian.cbb.user.dao.IUserRepository">
 	<resultMap id="selectUser"
 		type="com.wizian.cbb.user.model.UserVO">
-		<result property="userNO" column="USER_NO" />
+		<result property="userNo" column="USER_NO" />
 		<result property="userGroupCd" column="USER_GROUP_CD" />
 		<result property="loginId" column="LOGIN_ID" />
 		<result property="pswd" column="PSWD" />
@@ -17,7 +17,7 @@
 	<select id="selectUser" parameterType="string"
 		resultType="com.wizian.cbb.user.model.UserVO">
 		SELECT
-		USER_NO AS userNO,
+		USER_NO AS userNo,
 		USER_GROUP_CD AS userGroupCd,
 		LOGIN_ID AS loginId,
 		PSWD AS pswd,
@@ -41,7 +41,7 @@
 	<update id="updatePswdErrCnt"
 		parameterType="com.wizian.cbb.user.model.UserVO">
 		UPDATE USER_INFO
-		SET PSWD_ERR_CNT=PSWD_ERR_CNT+1
+		SET PSWD_ERR_CNT=#{pswdErrCnt}
 		WHERE
 		LOGIN_ID=#{loginId}
 	</update>
@@ -54,4 +54,33 @@
 		LOGIN_ID=#{loginId}
 	</update>
 
+	<select id="getUserInfo" resultType="hashmap">
+		SELECT
+		${nameSql} AS "Nm",
+		${telNoSql} AS "TelNo"
+		FROM ${tableNm}
+		WHERE
+		USER_NO IN(
+		SELECT USER_NO
+		FROM USER_INFO
+		WHERE
+		LOGIN_ID=#{loginId}
+		)
+	</select>
+
+	<update id="updatePswd"
+		parameterType="com.wizian.cbb.user.model.UserVO">
+		UPDATE USER_INFO
+		SET PSWD=#{pswd}
+		WHERE
+		LOGIN_ID=#{loginId}
+	</update>
+
+	<update id="updatePswdChgDt"
+		parameterType="com.wizian.cbb.user.model.UserVO">
+		UPDATE USER_INFO
+		SET PSWD_CHG_DT=SYSDATE
+		WHERE
+		LOGIN_ID=#{userId}
+	</update>
 </mapper>

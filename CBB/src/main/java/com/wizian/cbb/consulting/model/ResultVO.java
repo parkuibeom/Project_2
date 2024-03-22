@@ -8,6 +8,7 @@ public class ResultVO {
 	private String student;
 	private String content;
 	private String consultationDate;
+	private String time;
 	private String creationDate;
 	
 	public String getType() {
@@ -52,13 +53,20 @@ public class ResultVO {
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
-	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	@Override
 	public String toString() {
 		return "ResultVO [type=" + type + ", counselor=" + counselor + ", item=" + item + ", student=" + student
-				+ ", content=" + content + ", consultationDate=" + consultationDate + ", creationDate=" + creationDate
-				+ "]";
+				+ ", content=" + content + ", consultationDate=" + consultationDate + ", time=" + time
+				+ ", creationDate=" + creationDate + "]";
 	}
+	
+	
 	
 	
 	
