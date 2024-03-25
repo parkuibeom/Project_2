@@ -16,11 +16,6 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
-const test = () => {
-  console.log(localStorage.getItem("id"));
-  console.log(localStorage.getItem("userGroupCd"));
-};
-
 const Login = () => {
   const [loginId, setId] = useState('')
   const [password, setPassword] = useState('')
@@ -28,32 +23,53 @@ const Login = () => {
   const loginSubmit = (e) => {
     e.preventDefault();
 
-    fetch('/cbb/user/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ loginId, password }),
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          return response.json().then(data => {
-            throw new Error(data.error); // 서버에서 반환한 오류 메시지 처리
-          });
-        }
+    if (loginId === '') {
+      alert("아이디를 입력하세요")
+    } else if (password === '') {
+      alert("비밀번호를 입력하세요")
+    } else {
+      fetch('/cbb/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ loginId, password }),
       })
-      .then(data => {
-        localStorage.setItem('loginId', data.loginId);
-        localStorage.setItem('userGroupCd', data.userGroupCd);
-        console.log(localStorage.getItem("loginId"));
-        console.log(localStorage.getItem("userGroupCd"));
-        navigate('/dashboard');
-      })
-      .catch(error => {
-        alert(error.message);
-      });
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.text().then(errorMessage => {
+              if (errorMessage.startsWith('<!doctype')) {
+                throw new Error('아이디 또는 비밀번호가 틀립니다.\n5회 이상 틀릴시 계정이 잠깁니다.');
+              } else {
+                const errorData = JSON.parse(errorMessage);
+                throw new Error(errorData.error);
+              }
+            });
+          }
+        })
+        .then(data => {
+          localStorage.setItem('userNo', data.userNo); // 학생 취업 지원 상태 위해서 추가 by송양민
+          localStorage.setItem('loginId', data.loginId);
+          localStorage.setItem('userGroupCd', data.userGroupCd);
+          if (localStorage.getItem("userGroupCd") === "40") {
+            navigate('/professorSelect');
+          } else if (localStorage.getItem("userGroupCd") === "50") {
+            navigate('/tngApplication');
+          } else if (localStorage.getItem("userGroupCd") === "10") {
+            navigate('/tngApproval');
+          } else if (localStorage.getItem("userGroupCd") === "20") {
+            navigate('/stdntAply');
+          }
+          else {
+            navigate('/dashboard');
+          }
+        })
+        .catch(error => {
+          alert(error.message);
+        });
+    }
 
   }
   return (
@@ -96,17 +112,11 @@ const Login = () => {
                         </CButton>
                       </CCol>
                       <CCol xs={6} className="text-right">
-<<<<<<< HEAD
-                        <CButton color="link" className="px-0" onClick={test}>
-                          비밀번호 찾기
-                        </CButton>
-=======
                         <Link to="/forgotPswd">
                           <CButton color="link" className="px-0">
                             비밀번호 찾기
                           </CButton>
                         </Link>
->>>>>>> e74673ae8b0c07d08e70c00f19be4c95ad2a4f5d
                       </CCol>
                     </CRow>
                   </CForm>
@@ -115,10 +125,9 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>대학 사이트</h2>
+                    <h2>OO 대학교</h2>
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                      tempor incididunt ut labore et dolore magna aliqua.
+                      현장 실습 관리
                     </p>
                   </div>
                 </CCardBody>
