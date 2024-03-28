@@ -32,7 +32,7 @@ const StudentResult = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch(`/cbb/consulting/result`);
+      const response = await fetch(`/cbb/consulting/resultList`);
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -137,17 +137,25 @@ const StudentResult = () => {
                         {item.creationDate.slice(0, 10)}
                       </CTableDataCell>
                       <CTableDataCell>
-                        <Modal item={item}/>
+                        <Modal item={item} />
                       </CTableDataCell>
                     </CTableRow>
                   ))}
-                  <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageClick}
-                  />
                 </CTableBody>
               </CTable>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "30px",
+                }}
+              >
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={handlePageClick}
+                />
+              </div>
             </CCardBody>
           </CCard>
         </CCol>

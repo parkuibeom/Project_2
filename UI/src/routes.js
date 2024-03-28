@@ -1,4 +1,5 @@
 import React from "react";
+import writePbanc from "./views/recruit/bzRecruit/WritePbanc";
 
 const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const Colors = React.lazy(() => import("./views/theme/colors/Colors"));
@@ -14,27 +15,32 @@ const ConsultationItem = React.lazy(() =>
 const ConsultationSchedule = React.lazy(() =>
   import("./views/consulting/admin/ConsultationSchedule")
 );
-const Result = React.lazy(() =>
+const ResultList = React.lazy(() =>
   import("./views/consulting/admin/ConsultationResult")
 );
 
 const ScheduleCheck = React.lazy(() =>
-  import("./views/consulting/counselor/CounselorSchedule")
+  import("./views/consulting/counselor/CounselorSchedule/CounselorSchedule")
 );
 const Timetable = React.lazy(() =>
-  import("./views/consulting/counselor/TimetableRegistration")
+  import(
+    "./views/consulting/counselor/TimetableRegistration/TimetableRegistration"
+  )
 );
 const Processing = React.lazy(() =>
-  import("./views/consulting/counselor/RequestProcessing")
+  import("./views/consulting/counselor/RequestProcessing/RequestProcessing")
 );
 
+const Result = React.lazy(() =>
+  import("./views/consulting/counselor/ResultRegistration/ResultRegistration")
+);
 
 const Request = React.lazy(() =>
-  import("./views/consulting/RequestConsultation")
+  import("./views/consulting/student/RequestConsultation")
 );
 
 const Requestschedule = React.lazy(() =>
-  import("./views/consulting/Requestschedule")
+  import("./views/consulting/student/Requestschedule")
 );
 
 // Base
@@ -137,6 +143,10 @@ const TablePbanc = React.lazy(() => import("./views/recruit/TablePbanc"));
 const DetailPbanc = React.lazy(() => import("./views/recruit/DetailPbanc"));
 const TableAplyPbanc = React.lazy(() => import("./views/recruit/ApplyList"));
 const WriteResume = React.lazy(() => import("./views/recruit/WriteResume"));
+const HandleResume = React.lazy(() => import("./views/recruit/HandleResume"));
+const WritePbanc = React.lazy(() =>
+  import("./views/recruit/bzRecruit/WritePbanc")
+);
 
 const routes = [
   // consulting
@@ -147,10 +157,12 @@ const routes = [
     name: "Theme",
     element: ConsultationSchedule,
   },
-  { path: "/result", name: "Theme", element: Result },
+  { path: "/resultList", name: "Theme", element: ResultList },
   { path: "/schedule", name: "Theme", element: ScheduleCheck },
   { path: "/timeTable", name: "Theme", element: Timetable },
   { path: "/processing", name: "Theme", element: Processing },
+  { path: "/result", name: "Theme", element: Result },
+
   { path: "/consultationRequest", name: "Theme", element: Request },
   {
     path: "/requestschedule/:sonuselorId",
@@ -161,7 +173,7 @@ const routes = [
   // TNG
   {
     path: "/professorSelect",
-    name: "ProfessorSelect",
+    name: "지도교수 배정",
     element: ProfessorSelect,
   },
   { path: "/tngApplication", name: "현장실습 신청", element: TNGApplication },
@@ -183,7 +195,7 @@ const routes = [
   { path: "/tngRcd", name: "지도일지 작성", element: TngRcd },
 
   // RECRUIT
-  { path: "/recruit/tablePbanc", name: "TablePbanc", element: TablePbanc },
+  { path: "/recruit/TablePbanc", name: "TablePbanc", element: TablePbanc },
   {
     path: "/recruit/detailPbanc/:pbancSn",
     name: "detailPbanc",
@@ -195,6 +207,16 @@ const routes = [
     element: TableAplyPbanc,
   },
   { path: "/recruit/WriteResume", name: "WriteResume", element: WriteResume },
+  {
+    path: "/recruit/HandleResume",
+    name: "HandleResume",
+    element: HandleResume,
+  },
+  {
+    path: "/recruit/bzRecruit/WritePbanc",
+    name: "WritePbanc",
+    element: WritePbanc,
+  },
 
   //
   { path: "/dashboard", name: "Dashboard", element: Dashboard },
